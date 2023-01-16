@@ -1,0 +1,1 @@
+export const BaseUrl = 'http://192.168.49.79:4000/api/users'
