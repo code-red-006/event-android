@@ -6,6 +6,7 @@ import {
   Pressable,
   Alert,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
@@ -59,75 +60,95 @@ const Register = ({navigation}) => {
     navigation.replace('login');
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 0);
+  }, []);
+
   return (
     <View style={styles.body}>
-      <Text style={styles.title}>Event Organizer</Text>
-      <View style={styles.form}>
-        <Text style={styles.formTitle}>Register</Text>
-        <View style={styles.inputView}>
-          <TextInput
-            value={name}
-            style={styles.inputText}
-            onChangeText={value => setName(value)}
-            placeholder="Name"
-          />
+      {loading ? (
+        <View style={styles.wrapper}>
+          <ActivityIndicator size="large" />
         </View>
-        <View style={styles.inputView}>
-          <TextInput
-            value={adm_no}
-            style={styles.inputText}
-            onChangeText={value => setAdmNumber(value)}
-            placeholder="Admission Number"
-            keyboardType="numeric"
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            value={department}
-            style={styles.inputText}
-            onChangeText={value => setDepartment(value)}
-            placeholder="Department"
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            value={year}
-            style={styles.inputText}
-            onChangeText={value => setYear(value)}
-            placeholder="Year"
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            value={password}
-            style={styles.inputText}
-            onChangeText={value => setPassword(value)}
-            placeholder="Password"
-            secureTextEntry
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            value={mobile}
-            style={styles.inputText}
-            onChangeText={value => setMobile(value)}
-            placeholder="Mobile Number"
-            keyboardType="numeric"
-          />
-        </View>
-        <Pressable
-          onPress={submitHandler}
-          style={styles.submitBtn}
-          android_ripple={{color: '#ffffff98'}}>
-          <Text style={{color: '#fff', fontWeight: 'bold'}}>Submit</Text>
-        </Pressable>
-      </View>
-      {error && <Text style={styles.error}>{error}</Text>}
-      <Pressable onPress={loginBtnHandler} style={styles.registerBtn}>
-        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>
-          Login
-        </Text>
-      </Pressable>
+      ) : (
+        <>
+          <Text style={styles.title}>Event Organizer</Text>
+          <View style={styles.form}>
+            <Text style={styles.formTitle}>Register</Text>
+            <View style={styles.inputView}>
+              <TextInput
+                value={name}
+                style={styles.inputText}
+                onChangeText={value => setName(value)}
+                placeholder="Name"
+                placeholderTextColor="#00000050"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                value={adm_no}
+                style={styles.inputText}
+                onChangeText={value => setAdmNumber(value)}
+                placeholder="Admission Number"
+                keyboardType="numeric"
+                placeholderTextColor="#00000050"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                value={department}
+                style={styles.inputText}
+                onChangeText={value => setDepartment(value)}
+                placeholder="Department"
+                placeholderTextColor="#00000050"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                value={year}
+                style={styles.inputText}
+                onChangeText={value => setYear(value)}
+                placeholder="Year"
+                placeholderTextColor="#00000050"
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                value={password}
+                style={styles.inputText}
+                onChangeText={value => setPassword(value)}
+                placeholder="Password"
+                placeholderTextColor="#00000050"
+                secureTextEntry
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+                value={mobile}
+                style={styles.inputText}
+                onChangeText={value => setMobile(value)}
+                placeholder="Mobile Number"
+                placeholderTextColor="#00000050"
+                keyboardType="numeric"
+              />
+            </View>
+            <Pressable
+              onPress={submitHandler}
+              style={styles.submitBtn}
+              android_ripple={{color: '#ffffff98'}}>
+              <Text style={{color: '#fff', fontWeight: 'bold'}}>Submit</Text>
+            </Pressable>
+          </View>
+          {error && <Text style={styles.error}>{error}</Text>}
+          <Pressable onPress={loginBtnHandler} style={styles.registerBtn}>
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>
+              Login
+            </Text>
+          </Pressable>
+        </>
+      )}
     </View>
   );
 };

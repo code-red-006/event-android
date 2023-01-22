@@ -5,6 +5,7 @@ import {BaseUrl} from '../constents';
 
 export const useLoggedIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [data, setData] = useState(null);
   const [pending, setPending] = useState(true);
   const url = `${BaseUrl}/verify`;
   useEffect(() => {
@@ -15,6 +16,7 @@ export const useLoggedIn = () => {
           headers: {Authorization: `Bearer ${token}`},
         });
         setIsLoggedIn(true);
+        setData(res.data)
         setPending(false);
       } catch (error) {
         setPending(false);
@@ -23,5 +25,5 @@ export const useLoggedIn = () => {
     check();
   });
 
-  return {isLoggedIn, pending};
+  return {isLoggedIn, data, pending};
 };

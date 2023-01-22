@@ -1,14 +1,18 @@
-import {View, Text} from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {View, Text, Button, Image} from 'react-native';
 import React from 'react';
 import Events from './Events';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Profile from './Profile';
+
+const Tab = createBottomTabNavigator();
 
 const Home = () => {
-  const Drawer = createDrawerNavigator();
+  let temp = 'hi';
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Events" component={Events} />
-    </Drawer.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Events" component={Events} />
+      <Tab.Screen name="programs" component={Profile} />
+    </Tab.Navigator>
   );
 };
 

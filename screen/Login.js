@@ -53,6 +53,7 @@ const Login = ({navigation}) => {
   };
 
   const registerBtnHandler = () => {
+    setLoading(true);
     navigation.replace('register');
   };
 
@@ -73,6 +74,7 @@ const Login = ({navigation}) => {
                 style={styles.inputText}
                 onChangeText={value => setAdmNumber(value)}
                 placeholder="Admission Number"
+                placeholderTextColor="#00000050"
                 keyboardType="numeric"
               />
             </View>
@@ -82,6 +84,7 @@ const Login = ({navigation}) => {
                 style={styles.inputText}
                 onChangeText={value => setPassword(value)}
                 placeholder="Password"
+                placeholderTextColor="#00000050"
                 secureTextEntry
               />
             </View>
@@ -130,12 +133,14 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: '80%',
     alignItems: 'center',
+    marginBottom: 60,
   },
   inputView: {
     flexDirection: 'row',
     margin: 5,
   },
   inputText: {
+    color: 'black',
     backgroundColor: '#fff',
     borderColor: '#00000070',
     borderWidth: 1.5,

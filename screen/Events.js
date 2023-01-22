@@ -3,14 +3,18 @@ import {
   Text,
   ActivityIndicator,
   StyleSheet,
-  SectionList,
+  ImageBackground,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useFetch} from '../hooks/useFetch';
 import {BaseUrl} from '../constents';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import BG from '../assets/bg.jpg';
+import bg2 from '../assets/bg2.jpg';
+import bg3 from '../assets/bg3.jpg';
 
 const Events = ({navigation}) => {
+  const bgArray = [BG, bg2, bg3];
   const [loading, setLoading] = useState(true);
   const {data: events, pending} = useFetch(
     `${BaseUrl}/events`,
@@ -31,18 +35,20 @@ const Events = ({navigation}) => {
         </View>
       )}
       {events && (
-        <View style={styles.events}>
-          <FlatList
-            numColumns={2}
-            data={events}
-            renderItem={({item}) => (
-              <View style={styles.event}>
+        <FlatList
+          data={events}
+          renderItem={({item, index}) => (
+            <View style={styles.event}>
+              <ImageBackground
+                style={{flex: 1, padding: 20}}
+                imageStyle={styles.bg}
+                source={bgArray[index]}>
                 <Text style={styles.eventName}>{item.event_name}</Text>
-              </View>
-            )}
-            keyExtractor={item => item._id}
-          />
-        </View>
+              </ImageBackground>
+            </View>
+          )}
+          keyExtractor={item => item._id}
+        />
       )}
     </View>
   );
@@ -50,9 +56,7 @@ const Events = ({navigation}) => {
 
 const styles = StyleSheet.create({
   body: {
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
+    flex: 1,
   },
   wrapper: {
     position: 'absolute',
@@ -64,21 +68,26 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   events: {
-    padding: 10,
+    flex: 1,
+    padding: 20,
+  },
+  list: {
+    alignItems: 'center',
+    backgroundColor: '#000',
   },
   event: {
     backgroundColor: 'white',
-    padding: 25,
     margin: 10,
     elevation: 3,
     borderRadius: 15,
-    width: '45%',
-    minHeight: 200,
-    alignItems: 'center',
+    height: 150,
   },
   eventName: {
     fontSize: 20,
     color: 'black',
+  },
+  bg: {
+    borderRadius: 15,
   },
 });
 
