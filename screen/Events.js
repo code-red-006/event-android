@@ -4,11 +4,12 @@ import {
   ActivityIndicator,
   StyleSheet,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useFetch} from '../hooks/useFetch';
 import {BaseUrl} from '../constents';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import BG from '../assets/bg.jpg';
 import bg2 from '../assets/bg2.jpg';
 import bg3 from '../assets/bg3.jpg';
@@ -27,6 +28,12 @@ const Events = ({navigation}) => {
       setLoading(false);
     }
   }, [pending]);
+
+  const viewEvent = eventId => {
+    console.log(eventId);
+    navigation.navigate('programs', {eventId})
+  };
+
   return (
     <View style={styles.body}>
       {loading && (
@@ -38,14 +45,18 @@ const Events = ({navigation}) => {
         <FlatList
           data={events}
           renderItem={({item, index}) => (
-            <View style={styles.event}>
-              <ImageBackground
-                style={{flex: 1, padding: 20}}
-                imageStyle={styles.bg}
-                source={bgArray[index]}>
-                <Text style={styles.eventName}>{item.event_name}</Text>
-              </ImageBackground>
-            </View>
+            <Pressable
+              android_ripple={{color: '#00000098'}}
+              onPress={() => viewEvent(item._id)}>
+              <View style={styles.event}>
+                <ImageBackground
+                  style={{flex: 1, padding: 20}}
+                  imageStyle={styles.bg}
+                  source={bgArray[index]}>
+                  <Text style={styles.eventName}>{item.event_name}</Text>
+                </ImageBackground>
+              </View>
+            </Pressable>
           )}
           keyExtractor={item => item._id}
         />

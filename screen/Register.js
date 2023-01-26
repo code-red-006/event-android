@@ -5,7 +5,6 @@ import {
   TextInput,
   Pressable,
   Alert,
-  ScrollView,
   ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -57,6 +56,7 @@ const Register = ({navigation}) => {
   };
 
   const loginBtnHandler = () => {
+    setLoading(true)
     navigation.replace('login');
   };
 

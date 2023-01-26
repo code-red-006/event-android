@@ -7,29 +7,16 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {BaseUrl} from '../constents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useLoggedIn, useToken} from '../hooks/useLoggedIn';
 
 const Login = ({navigation}) => {
   const [admNumber, setAdmNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const {isLoggedIn, pending} = useLoggedIn();
-
-  useEffect(() => {
-    if (!pending) {
-      if (isLoggedIn) {
-        navigation.navigate('home');
-      } else {
-        setLoading(false);
-      }
-    }
-  }, [pending]);
+  const [loading, setLoading] = useState(false);
 
   const submitHandler = async () => {
     setError(null);
@@ -44,6 +31,7 @@ const Login = ({navigation}) => {
     };
     const url = `${BaseUrl}/login`;
     try {
+      //console.log(data);
       const res = await axios.post(url, data);
       await AsyncStorage.setItem('token', res.data.token);
       navigation.replace('home');

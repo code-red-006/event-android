@@ -3,7 +3,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useFetch = (url, name, navigation) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [pending, setPending] = useState(true);
 
   useEffect(() => {

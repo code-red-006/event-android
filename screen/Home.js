@@ -7,11 +7,10 @@ import Profile from './Profile';
 const Tab = createBottomTabNavigator();
 
 const Home = () => {
-  let temp = 'hi';
   return (
     <Tab.Navigator>
       <Tab.Screen name="Events" component={Events} />
-      <Tab.Screen name="programs" component={Profile} />
+      <Tab.Screen name="profile" component={Profile} />
     </Tab.Navigator>
   );
 };
