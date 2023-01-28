@@ -6,12 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Profile = ({navigation}) => {
   const {data, pending} = useLoggedIn();
 
-  useEffect(() => {
-    if (!pending) {
-      console.log(data);
-    }
-  }, [pending]);
-
   const logOut = async () => {
     try {
       await AsyncStorage.removeItem('token');

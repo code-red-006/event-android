@@ -1,21 +1,32 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {FlatList} from 'react-native-gesture-handler';
+import {ProgramContext} from '../../store/ProgramContext';
 import {BaseUrl} from '../../constents';
 import {useFetch} from '../../hooks/useFetch';
-import {FlatList} from 'react-native-gesture-handler';
 
 const SinglePrograms = ({navigation, route}) => {
   const {eventId} = route.params;
-
+  const {user, setSingle} = useContext(ProgramContext);
   const {data: single, pending} = useFetch(
-    `${BaseUrl}/events/programs/${eventId}`,
+    `${BaseUrl}/programs/single/${eventId}/${user}`,
     'single',
     navigation,
   );
 
-  const viewProgramDetails = () => {
-    navigation.navigate('programDetails', {title: 'hello'})
-  }
+  useEffect(() => {
+    if (!pending) {
+      setSingle(single);
+    }
+  }, [pending]);
+
+  const viewProgramDetails = index => {
+    navigation.navigate('programDetails', {
+      title: 'Details',
+      index,
+      single: true,
+    });
+  };
 
   return (
     <View style={styles.body}>
@@ -24,7 +35,7 @@ const SinglePrograms = ({navigation, route}) => {
           data={single}
           renderItem={({item, index}) => (
             <Pressable
-            onPress={viewProgramDetails}
+              onPress={() => viewProgramDetails(index)}
               style={({pressed}) => [
                 styles.program,
                 {

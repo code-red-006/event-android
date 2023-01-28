@@ -1,16 +1,32 @@
 import {View, Text, StyleSheet, FlatList, Pressable} from 'react-native';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+import {ProgramContext} from '../../store/ProgramContext';
 import {BaseUrl} from '../../constents';
 import {useFetch} from '../../hooks/useFetch';
 
 const GroupePrograms = ({navigation, route}) => {
+  const {user, setGroupe} = useContext(ProgramContext);
   const {eventId} = route.params;
 
-  const {data: groupe} = useFetch(
-    `${BaseUrl}/events/programs/${eventId}`,
+  const {data: groupe, pending} = useFetch(
+    `${BaseUrl}/programs/groupe/${eventId}/${user}`,
     'groupe',
     navigation,
   );
+
+  useEffect(() => {
+    if (!pending) {
+      setGroupe(groupe);
+    }
+  }, [pending]);
+
+  const viewProgramDetails = index => {
+    navigation.navigate('programDetails', {
+      title: 'Details',
+      index,
+    });
+  };
+
   return (
     <View style={styles.body}>
       {groupe && (
@@ -18,6 +34,7 @@ const GroupePrograms = ({navigation, route}) => {
           data={groupe}
           renderItem={({item, index}) => (
             <Pressable
+              onPress={() => viewProgramDetails(index)}
               style={({pressed}) => [
                 styles.program,
                 {

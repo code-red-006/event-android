@@ -1,8 +1,4 @@
-import {View, Text} from 'react-native';
-import React, {useContext, useEffect} from 'react';
-import {useFetch} from '../../hooks/useFetch';
-import {BaseUrl} from '../../constents';
-import {ProgramContext} from '../../store/ProgramContext';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SinglePrograms from './SinglePrograms';
 import GroupePrograms from './GroupePrograms';

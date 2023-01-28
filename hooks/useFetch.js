@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const useFetch = (url, name, navigation) => {
   const [data, setData] = useState(null);
   const [pending, setPending] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,10 +17,17 @@ export const useFetch = (url, name, navigation) => {
         setPending(false);
       } catch (error) {
         console.log(error.response.data);
+        if (error.response.data.msg === 'jwt expired')
+          navigation.navigate('login');
         setPending(false);
       }
     };
     fetchData();
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('Refreshed!');
+      fetchData();
+    });
+    return unsubscribe;
   }, []);
   return {data, pending};
 };
