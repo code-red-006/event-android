@@ -7,9 +7,9 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {ProgramContext} from '../../../store/ProgramContext';
+import {ProgramContext} from '../../store/ProgramContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {BaseUrl} from '../../../constents';
+import {BaseUrl} from '../../constents';
 import axios from 'axios';
 
 const ProgramDetails = ({route}) => {

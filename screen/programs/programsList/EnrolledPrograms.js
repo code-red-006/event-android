@@ -1,8 +1,8 @@
 import {View, Text, StyleSheet, Pressable, SectionList} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {ProgramContext} from '../../store/ProgramContext';
-import {useFetch} from '../../hooks/useFetch';
-import {BaseUrl} from '../../constents';
+import {ProgramContext} from '../../../store/ProgramContext';
+import {useFetch} from '../../../hooks/useFetch';
+import {BaseUrl} from '../../../constents';
 
 const EnrolledPrograms = ({navigation, route}) => {
   const {user, setEnrolledGroupe, setEnrolledSingle} =

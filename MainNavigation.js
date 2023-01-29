@@ -5,13 +5,12 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
 import {useLoggedIn} from './hooks/useLoggedIn';
-import AdminLogin from './screen/AdminLogin';
-import Home from './screen/Home';
-import Login from './screen/Login';
-import ProgramDetails from './screen/programs/programDetails/ProgramDetails';
-import SingleDetails from './screen/programs/programDetails/ProgramDetails';
-import Programs from './screen/programs/Programs';
-import Register from './screen/Register';
+import AdminLogin from './screen/authentication/AdminLogin';
+import Home from './screen/HomeNavigation';
+import Login from './screen/authentication/Login';
+import ProgramDetails from './screen/programs/ProgramDetails';
+import Programs from './screen/programs/ProgramNavigation';
+import Register from './screen/authentication/Register';
 
 const MainNavigation = () => {
   const {isLoggedIn, data, pending} = useLoggedIn();

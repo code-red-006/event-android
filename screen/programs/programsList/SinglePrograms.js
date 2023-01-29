@@ -1,22 +1,22 @@
-import {View, Text, StyleSheet, FlatList, Pressable} from 'react-native';
-import React, {useContext, useEffect} from 'react';
-import {ProgramContext} from '../../store/ProgramContext';
-import {BaseUrl} from '../../constents';
-import {useFetch} from '../../hooks/useFetch';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {FlatList} from 'react-native-gesture-handler';
+import {ProgramContext} from '../../../store/ProgramContext';
+import {BaseUrl} from '../../../constents';
+import {useFetch} from '../../../hooks/useFetch';
 
-const GroupePrograms = ({navigation, route}) => {
-  const {user, setGroupe} = useContext(ProgramContext);
+const SinglePrograms = ({navigation, route}) => {
   const {eventId} = route.params;
-
-  const {data: groupe, pending} = useFetch(
-    `${BaseUrl}/programs/groupe/${eventId}/${user}`,
-    'groupe',
+  const {user, setSingle} = useContext(ProgramContext);
+  const {data: single, pending} = useFetch(
+    `${BaseUrl}/programs/single/${eventId}/${user}`,
+    'single',
     navigation,
   );
 
   useEffect(() => {
     if (!pending) {
-      setGroupe(groupe);
+      setSingle(single);
     }
   }, [pending]);
 
@@ -24,14 +24,15 @@ const GroupePrograms = ({navigation, route}) => {
     navigation.navigate('programDetails', {
       title: 'Details',
       index,
+      single: true,
     });
   };
 
   return (
     <View style={styles.body}>
-      {groupe && (
+      {single && (
         <FlatList
-          data={groupe}
+          data={single}
           renderItem={({item, index}) => (
             <Pressable
               onPress={() => viewProgramDetails(index)}
@@ -52,7 +53,7 @@ const GroupePrograms = ({navigation, route}) => {
   );
 };
 
-export default GroupePrograms;
+export default SinglePrograms;
 
 const styles = StyleSheet.create({
   body: {

@@ -5,13 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profile from './Profile';
 import {useLoggedIn} from '../hooks/useLoggedIn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ProgramContext } from '../store/ProgramContext';
+import {ProgramContext} from '../store/ProgramContext';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {default as Ev} from 'react-native-vector-icons/EvilIcons';
 
 const Tab = createBottomTabNavigator();
 
 const Home = () => {
   const {data, pending} = useLoggedIn();
-  const {setUser} = useContext(ProgramContext)
+  const {setUser} = useContext(ProgramContext);
   useEffect(() => {
     const check = async () => {
       if (!pending) {
@@ -22,7 +24,20 @@ const Home = () => {
     check();
   }, [pending]);
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          color = focused ? 'blue' : 'black';
+          if (route.name === 'Events') {
+            return <Icon name="event" color={color} style={{fontSize: 30}} />;
+          } else if (route.name === 'profile') {
+            return <Ev name="user" color={color} style={{fontSize: 40}} />;
+          }
+        },
+        tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
+        tabBarStyle: {height: 60},
+        tabBarActiveTintColor: '#00f',
+      })}>
       <Tab.Screen name="Events" component={Events} />
       <Tab.Screen name="profile" component={Profile} />
     </Tab.Navigator>

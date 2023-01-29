@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import axios from 'axios';
-import {BaseUrl} from '../constents';
+import {BaseUrl} from '../../constents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {

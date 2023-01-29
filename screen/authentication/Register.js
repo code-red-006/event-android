@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {BaseUrl} from '../constents';
+import {BaseUrl} from '../../constents';
 
 const Register = ({navigation}) => {
   const [adm_no, setAdmNumber] = useState('');
