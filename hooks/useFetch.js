@@ -25,6 +25,7 @@ export const useFetch = (url, name, navigation) => {
     fetchData();
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Refreshed!');
+      setPending(true)
       fetchData();
     });
     return unsubscribe;

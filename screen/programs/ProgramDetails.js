@@ -16,6 +16,7 @@ const ProgramDetails = ({route}) => {
   const {single, groupe, enrolledSingle, enrolledGroupe} =
     useContext(ProgramContext);
   const [data, setData] = useState(null);
+  const [update, setUpdate] = useState(null);
   const [enrolled, setEnrolled] = useState(true);
   const {index} = route.params;
   const [popup, setPopup] = useState(false);
@@ -36,7 +37,7 @@ const ProgramDetails = ({route}) => {
         setData(groupe);
       }
     }
-  }, []);
+  }, [index]);
 
   const enroll = async single => {
     try {
@@ -64,6 +65,7 @@ const ProgramDetails = ({route}) => {
         setPopup(false);
       }
       setEnrolled(true);
+      setUpdate({hi: 'yes'});
     } catch (error) {
       Alert.alert('error');
     }

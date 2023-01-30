@@ -23,7 +23,7 @@ export const useLoggedIn = () => {
       }
     };
     check();
-  });
+  }, []);
 
   return {isLoggedIn, data, pending};
 };

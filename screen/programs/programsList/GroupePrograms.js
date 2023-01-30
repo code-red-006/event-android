@@ -15,9 +15,12 @@ const GroupePrograms = ({navigation, route}) => {
   );
 
   useEffect(() => {
-    if (!pending) {
-      setGroupe(groupe);
-    }
+    const check = () => {
+      if (!pending) {
+        setGroupe([...groupe]);
+      }
+    };
+    check();
   }, [pending]);
 
   const viewProgramDetails = index => {
@@ -41,7 +44,9 @@ const GroupePrograms = ({navigation, route}) => {
                   elevation: pressed ? 3 : 1,
                 },
               ]}>
-              <Text style={styles.programTitle}>{item.program_name}</Text>
+              <Text style={styles.programTitle}>
+                {item.program_name}
+              </Text>
             </Pressable>
           )}
           style={styles.lists}
