@@ -131,6 +131,7 @@ const Register = ({navigation}) => {
                 onChangeText={value => setMobile(value)}
                 placeholder="Mobile Number"
                 placeholderTextColor="#00000050"
+                textColor="black"
                 keyboardType="numeric"
               />
             </View>
@@ -195,6 +196,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     padding: 10,
+    color: 'black',
   },
   submitBtn: {
     backgroundColor: '#000',

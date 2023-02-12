@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SinglePrograms from './programsList/SinglePrograms';
 import GroupePrograms from './programsList/GroupePrograms';
 import EnrolledPrograms from './programsList/EnrolledPrograms';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useContext } from 'react';
+import { ProgramContext } from '../../store/ProgramContext';
 
 const Programs = ({navigation, route}) => {
   const {eventId} = route.params;
   const Tab = createBottomTabNavigator();
+  const {house} = useContext(ProgramContext)
 
   return (
     <Tab.Navigator
@@ -26,7 +29,7 @@ const Programs = ({navigation, route}) => {
           }
         },
         tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
-        tabBarStyle: {height: 60, padding: 5},
+        tabBarStyle: {padding: 5},
         tabBarActiveTintColor: '#00f',
       })}>
       <Tab.Screen

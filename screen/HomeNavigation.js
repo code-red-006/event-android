@@ -13,12 +13,14 @@ const Tab = createBottomTabNavigator();
 
 const Home = () => {
   const {data, pending} = useLoggedIn();
-  const {setUser} = useContext(ProgramContext);
+  const {setUser, setAdmNo} = useContext(ProgramContext);
   useEffect(() => {
     const check = async () => {
       if (!pending) {
         await AsyncStorage.setItem('userId', data.id);
         setUser(data.id);
+        setAdmNo(data.admNo);
+        console.log(data.admNo);
       }
     };
     check();

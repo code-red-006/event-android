@@ -62,6 +62,12 @@ const EnrolledPrograms = ({navigation, route}) => {
     }
   };
 
+  const foot = () => (
+    <View>
+      <Text></Text>
+    </View>
+  );
+
   return (
     <View style={styles.body}>
       {programs && (
@@ -85,6 +91,7 @@ const EnrolledPrograms = ({navigation, route}) => {
             )}
             style={styles.lists}
             keyExtractor={item => item._id}
+            ListFooterComponent={foot}
           />
         </>
       )}
@@ -99,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   lists: {
-    padding: 15,
+    padding: 20,
     flex: 1,
   },
   program: {

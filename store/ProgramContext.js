@@ -8,11 +8,15 @@ function Program({children}) {
   const [groupe, setGroupe] = useState(null);
   const [enrolledSingle, setEnrolledSingle] = useState(null);
   const [enrolledGroupe, setEnrolledGroupe] = useState(null);
+  const [house, setHouse] = useState(null);
+  const [admNo, setAdmNo] = useState(null);
 
   return (
     <>
       <ProgramContext.Provider
         value={{
+          admNo,
+          setAdmNo,
           single,
           setSingle,
           groupe,
@@ -22,7 +26,9 @@ function Program({children}) {
           enrolledGroupe,
           setEnrolledGroupe,
           user,
-          setUser
+          setUser,
+          house,
+          setHouse,
         }}>
         {children}
       </ProgramContext.Provider>

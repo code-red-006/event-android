@@ -28,6 +28,12 @@ const SinglePrograms = ({navigation, route}) => {
     });
   };
 
+  const foot = () => (
+    <View>
+      <Text></Text>
+    </View>
+  );
+
   return (
     <View style={styles.body}>
       {single && (
@@ -47,6 +53,7 @@ const SinglePrograms = ({navigation, route}) => {
           )}
           style={styles.lists}
           keyExtractor={item => item._id}
+          ListFooterComponent={foot}
         />
       )}
     </View>
