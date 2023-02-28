@@ -60,8 +60,8 @@ const Events = ({navigation}) => {
             const temp = [];
             events[index].houses.forEach(item => {
               temp.push({
-                label: item,
-                value: item,
+                label: item.name,
+                value: item.name,
               });
             });
             setHouseList([...temp]);

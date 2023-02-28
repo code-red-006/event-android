@@ -58,6 +58,7 @@ const EnrolledPrograms = ({navigation, route}) => {
         title: 'Details',
         index,
         enrolled: true,
+        eventId
       });
     }
   };

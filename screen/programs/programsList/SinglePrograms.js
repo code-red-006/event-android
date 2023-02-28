@@ -25,6 +25,7 @@ const SinglePrograms = ({navigation, route}) => {
       title: 'Details',
       index,
       single: true,
+      eventId,
     });
   };
 

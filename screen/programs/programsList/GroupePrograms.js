@@ -27,6 +27,7 @@ const GroupePrograms = ({navigation, route}) => {
     navigation.navigate('programDetails', {
       title: 'Details',
       index,
+      eventId
     });
   };
 

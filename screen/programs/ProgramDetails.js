@@ -61,7 +61,12 @@ const ProgramDetails = ({route}) => {
         const url = `${BaseUrl}/single/${data[index]._id}`;
         await axios.post(
           url,
-          {userId, type: data[index].type ? data[index].type : null},
+          {
+            userId,
+            type: data[index].type ? data[index].type : null,
+            house: house ? house : null,
+            eventId: route.params.eventId,
+          },
           {
             headers: {Authorization: `Bearer ${token}`},
           },
@@ -77,7 +82,7 @@ const ProgramDetails = ({route}) => {
         const url = `${BaseUrl}/groupe/${data[index]._id}/${userId}`;
         const groupe = {
           head_id: userId,
-          groupe_name: name,
+          group_name: name,
           house: house,
           members: [...memberId],
         };
@@ -111,6 +116,7 @@ const ProgramDetails = ({route}) => {
 
   const addMembers = async () => {
     if (admNo.length !== 8) return Alert.alert('eneter valid admission number');
+    if (admNo == adm) return Alert.alert('enter your team mates number');
     if (data[index].type) {
       try {
         const token = await AsyncStorage.getItem('token');
@@ -126,10 +132,7 @@ const ProgramDetails = ({route}) => {
         temp = memberId;
         temp.push(res.data.user._id);
         temp = removeDuplicates(temp);
-        console.log(temp);
         setMemberId([...temp]);
-        console.log(memberId);
-        console.log(members);
       } catch (error) {}
     }
   };
